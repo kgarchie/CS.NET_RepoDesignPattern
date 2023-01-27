@@ -1,0 +1,9 @@
+﻿POST http://localhost:5000/api/v1/users/register
+Content-Type: application/json
+
+{
+  "firstName": "",
+  "middleName": "",
+  "lastName": "",
+  "nationalUserId": 90
+}
