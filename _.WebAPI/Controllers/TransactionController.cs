@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Nodes;
-using _.Contracts;
+﻿using _.Contracts;
 using _.WebAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 using _.WebAPI.Models;
@@ -13,7 +12,7 @@ public class TransactionController : ControllerBase
     private readonly UnitOfWork _unitOfWork;
     private readonly ILogger<TransactionController> _logger;
 
-    public TransactionController(UnitOfWork unitOfWork, ILogger<TransactionController> logger)
+    public TransactionController(ILogger<TransactionController> logger, UnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -36,7 +35,31 @@ public class TransactionController : ControllerBase
         if (!transactionStatus) return new JsonResult("Transaction Failed Due To An Internal Error") { StatusCode = 500 };
 
         // Find a better way to do this
-        var result = "Transaction Successful" + request;
-        return new JsonResult(result);
+        var result = "Transaction Successful\n" + request;
+        return new JsonResult(result){StatusCode = 200};
+    }
+    
+    [HttpPost("buy-airtime")]
+    public async Task<IActionResult> BuyAirtime(BuyAirtimeRequest request)
+    {
+        // Map the request transaction values to the Transaction object
+        var transaction = new Transaction
+        {
+            TransactionAmount = request.Amount,
+            ToUser = await _unitOfWork.Users.GetUserById(request.UserId),
+            TransactionType = 2,
+            SystemTransactionId = new Guid().ToString()
+        };
+
+        var phoneNumber = request.PhoneNumber;
+        // TODO: to be modified once db has been updated with phone numbers
+        
+
+        var transactionStatus = await _unitOfWork.Transactions.MakeTransaction(transaction);
+        if (!transactionStatus) return new JsonResult("Transaction Failed Due To An Internal Error") { StatusCode = 500 };
+
+        // Find a better way to do this
+        var result = "Transaction Successful\n" + request;
+        return new JsonResult(result){StatusCode = 200};
     }
 }

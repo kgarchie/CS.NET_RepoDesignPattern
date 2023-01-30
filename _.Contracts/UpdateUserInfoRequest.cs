@@ -1,6 +1,6 @@
 ﻿namespace _.Contracts;
 
-public record UpdateRequest(
+public record UpdateUserInfoRequest(
     string? FirstName,
     string? MiddleName,
     string? LastName,

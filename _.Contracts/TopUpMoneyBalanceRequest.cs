@@ -1,6 +1,6 @@
 ﻿namespace _.Contracts;
 
-public record TopUpRequest(
+public record TopUpMoneyBalanceRequest(
     int UserId,
     int Amount
 );

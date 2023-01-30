@@ -29,7 +29,7 @@ public class UsersController : ControllerBase
              * Also, a lot of optimisations need to be made and the logic cleaned up, maybe by failing early to avoid all these if statements
              * 
              * <summary>
-             *  This functions attempts to create a user if he doesn't exist and the post data is valid
+             *  This functions attempts to create a user if he/she doesn't exist and the post data is valid
              * </summary>
              * <parameters>
              *  RegisterRequest request: This is a record defined in the _.Contracts folder, I used it to get the required data for registration
@@ -43,7 +43,7 @@ public class UsersController : ControllerBase
                 errors.Add("Error: National Id is required");
 
             if (errors.Any())
-                return new JsonResult(errors) {StatusCode = 400};
+                return new JsonResult(errors) {StatusCode = 401};
 
             var checkIfUserExists = await _unitOfWork.Users.GetUserByNationalId(request.NationalUserId);
             await _unitOfWork.CompleteAsync();
@@ -73,7 +73,7 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpPost("/user/{id:int}")]
+    [HttpGet("/user/{id:int}")]
     public async Task<IActionResult> GetUserById(int id)
     {
         /* <summary>
