@@ -1,0 +1,1 @@
+import{_ as e,o as n,c as t,a as s}from"./index-cfd8f6ef.js";const c={name:"RecentTransactions"},o=s("h1",null,"Recent Transactions",-1),a=[o];function r(_,i,d,l,p,f){return n(),t("div",null,a)}const m=e(c,[["render",r]]);export{m as default};

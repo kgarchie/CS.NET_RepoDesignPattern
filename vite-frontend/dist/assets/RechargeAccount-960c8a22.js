@@ -1,0 +1,1 @@
+import{_ as e,o as c,c as o,a as t}from"./index-cfd8f6ef.js";const n={name:"RechargeAccount"},a=t("h1",null,"Recharge Account",-1),s=[a];function r(_,u,d,l,p,h){return c(),o("div",null,s)}const f=e(n,[["render",r]]);export{f as default};

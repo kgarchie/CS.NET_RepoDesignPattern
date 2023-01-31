@@ -1,0 +1,1 @@
+import{_ as e,o as n,c as o,a as t}from"./index-cfd8f6ef.js";const s={name:"SendMoney"},c=t("h1",null,"Send Money",-1),a=[c];function r(_,d,l,p,i,f){return n(),o("div",null,a)}const m=e(s,[["render",r]]);export{m as default};

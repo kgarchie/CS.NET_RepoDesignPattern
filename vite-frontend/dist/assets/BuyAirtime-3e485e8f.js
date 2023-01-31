@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as o,a as s}from"./index-cfd8f6ef.js";const c={name:"BuyAirtime"},n=s("h1",null,"Buy Airtime",-1),r=[n];function a(i,_,u,d,l,m){return t(),o("div",null,r)}const f=e(c,[["render",a]]);export{f as default};
