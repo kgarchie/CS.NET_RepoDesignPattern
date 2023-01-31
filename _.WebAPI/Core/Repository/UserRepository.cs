@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
-using _.Contracts;
+﻿using _.Contracts;
 using _.WebAPI.Core.IRepository;
 using _.WebAPI.Data;
 using _.WebAPI.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace _.WebAPI.Core.Repository;
@@ -19,7 +17,7 @@ public class UserRepository : GenericRepository<User>, IUserRepository
         try
         {
             /* This repository function performs the actual user registration by doing the dirty db work
-             * Returns true of false depending on whether registration was successful
+             * Returns true or false depending on whether registration was successful
              * Areas of improvement have been noted in the controller
              */
             var checkIfUserExists = await Db.Usersinfos
