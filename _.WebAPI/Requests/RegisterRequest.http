@@ -2,8 +2,8 @@
 Content-Type: application/json
 
 {
-  "firstName": "",
-  "middleName": "",
-  "lastName": "",
+  "firstName": "name",
+  "middleName": "as",
+  "lastName": "ss",
   "nationalUserId": 90
 }

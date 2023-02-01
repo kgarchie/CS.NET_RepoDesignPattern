@@ -46,7 +46,7 @@ public class TransactionController : ControllerBase
         var transaction = new Transaction
         {
             TransactionAmount = request.Amount,
-            ToUser = await _unitOfWork.Users.GetUserById(request.UserId),
+            ToUser = await _unitOfWork.Users.GetUserById(request.FromUserId),
             TransactionType = 2,
             SystemTransactionId = new Guid().ToString()
         };

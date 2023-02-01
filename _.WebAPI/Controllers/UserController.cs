@@ -27,6 +27,7 @@ public class UsersController : ControllerBase
              * I will do that on v2 and in future versions, doing that here will break things
              * TODO: Delegate these procedures to repositories
              * Also, a lot of optimisations need to be made and the logic cleaned up, maybe by failing early to avoid all these if statements
+             * Also also, don't use Visual Studio(It sucks, and other files from other frameworks are invinsible to it). Use VS Code or any other appropriate IDE
              * 
              * <summary>
              *  This functions attempts to create a user if he/she doesn't exist and the post data is valid

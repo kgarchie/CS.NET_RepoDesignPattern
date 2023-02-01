@@ -17,11 +17,12 @@ import {RouterLink, RouterView} from 'vue-router'
       <RouterView />
     </section>
     <footer>
-      <h1>Footer</h1>
     </footer>
   </div>
 </template>
 
 <style scoped>
-
+  nav ul{
+    color: white;
+  }
 </style>

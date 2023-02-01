@@ -7,4 +7,8 @@ import './assets/css/main.css'
 import App from './App.vue'
 
 axios.defaults.baseURL = 'http://localhost:5000/api'
-createApp(App).use(router, axios).mount('#app')
+
+const app = createApp(App)
+
+app.use(router)
+app.mount('#app')

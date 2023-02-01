@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"vite\" \"sass --watch src/assets/css/scss/style.scss:src/assets/css/main.css\"",
-    "build": "sass src/assets/css/scss/style.scss:src/assets/css/main.css && vite build",
+    "build": "sass src/assets/css/scss/style.scss:src/assets/css/main.css && vite build && xcopy src/assets /s /e /y exclude:scr/assets/css* dist/assets/",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -13,6 +13,7 @@
     "concurrently": "^7.6.0",
     "sass": "^1.57.1",
     "vue": "^3.2.45",
+    "vue-meta": "^2.4.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

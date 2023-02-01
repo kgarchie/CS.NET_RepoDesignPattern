@@ -1,3 +1,15 @@
 ﻿.top-nav{
+  display: flex;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  justify-content: center;
+  align-items: center;
   
+  .menu{
+    display: flex;
+    min-width: 40%;
+    gap: 1rem;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
