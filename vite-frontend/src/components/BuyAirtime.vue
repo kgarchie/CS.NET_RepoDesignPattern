@@ -50,7 +50,11 @@ name: "BuyAirtime",
   mounted() {},
   methods: {
     async buyAirtime() {
-      this.airtime = {
+      if (this.airtime.amount === "" || this.airtime.phone === ""){
+        this.errors.push("Please fill in all fields");
+        return;
+      }
+      this.airtime = {        
         amount: parseInt(this.airtime.amount),
         phone: this.airtime.phone,
         
@@ -59,7 +63,7 @@ name: "BuyAirtime",
         toUserId: 10
       };
       axios.post(
-        "v1/buy-airtime",
+        "v1/transactions/buy-airtime/",
         this.airtime
       ).then((response) => {
         this.server_response = response.data;
@@ -68,6 +72,7 @@ name: "BuyAirtime",
         }
       }).catch((error) => {
         this.errors = error.response.data.errors;
+        console.log(this.errors);
       });
     },
   },
