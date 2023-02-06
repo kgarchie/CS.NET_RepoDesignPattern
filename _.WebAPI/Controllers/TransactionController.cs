@@ -40,7 +40,7 @@ public class TransactionController : ControllerBase
 
             // Find a better way to do this
             // Add a new line to the result
-            var result = "Transaction Successful" +
+            var result = "Transaction Successful " +
                          "" + request;
             return new JsonResult(result){StatusCode = 200};
         } catch (Exception e)
@@ -64,6 +64,7 @@ public class TransactionController : ControllerBase
         };
 
         var phoneNumber = request.PhoneNumber;
+        Console.Write(phoneNumber);
         // TODO: to be modified once db has been updated with phone numbers
         
 

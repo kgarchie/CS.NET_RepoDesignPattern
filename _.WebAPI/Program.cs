@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy( "CorsDevelopmentPolicy",
         policy =>
         {
-            policy.AllowAnyOrigin() // WithOrigins("http://localhost:5173")
+            policy.WithOrigins("http://localhost:5173")
                 // Remember to change these during actual production for security reasons
                 .AllowAnyHeader() // Alt is .WithHeaders("Content-Type", "Accept", "Authorization")us
                 .AllowAnyMethod(); // Alt is.WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
