@@ -36,7 +36,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return user;
     }
 
-    public async Task<bool> MakeTransaction(Transaction transaction)
+    public async Task<bool> GenericTransaction(Transaction transaction)
     {
         try
         {
@@ -47,20 +47,20 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             sender.Balance -= transaction.TransactionAmount;
             Db.Entry(sender).State = EntityState.Modified;
             await Db.SaveChangesAsync();
+            
+            // add to receiver
+            var receiver = transaction.ToUser;
+            if (receiver == null) return false;
+            await Db.SaveChangesAsync();
+
+            receiver.Balance += transaction.TransactionAmount;
+            Db.Entry(receiver).State = EntityState.Modified;
 
             // add to transaction table
             await Db.Transactions.AddAsync(transaction);
             Db.Entry(transaction).State = EntityState.Added;
             await Db.SaveChangesAsync();
-
-            // add to receiver
-            var receiver = transaction.ToUser;
-            if (receiver == null) return false;
-
-            receiver.Balance += transaction.TransactionAmount;
-            Db.Entry(receiver).State = EntityState.Modified;
-
-            await Db.SaveChangesAsync();
+            
             return true;
         }
         catch (Exception ex)

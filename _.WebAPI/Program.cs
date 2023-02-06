@@ -18,15 +18,17 @@ builder.Services.AddDbContext<ModelContext>(options => options
     .EnableDetailedErrors());
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        builder =>
+    options.AddPolicy( "CorsDevelopmentPolicy",
+        policy =>
         {
-            builder.WithOrigins("http://localhost:5173")
+            policy.AllowAnyOrigin() // WithOrigins("http://localhost:5173")
                 // Remember to change these during actual production for security reasons
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+                .AllowAnyHeader() // Alt is .WithHeaders("Content-Type", "Accept", "Authorization")us
+                .AllowAnyMethod(); // Alt is.WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+            
         });
 });
 
@@ -45,6 +47,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseCors();
+app.UseCors("CorsDevelopmentPolicy");
 
 app.Run();

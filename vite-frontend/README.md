@@ -21,3 +21,10 @@ npm run dev
 * You have already created the database and run the migrations in the C# project
 * The database population file is under _.WebAPI > Database
 
+### How To Change Default Port On Vite
+* Open the file `vite.config.js`
+* Change the port number on line 3
+* Save the file
+* Restart the project
+* The project will now run on the new port number
+

@@ -16,11 +16,15 @@ public class TransactionRepository : GenericRepository<Transaction>, ITransactio
         return await Db.Transactions.OrderByDescending(x => x.TransactionDate).ToListAsync();
     }
 
+    public async Task<IEnumerable<Transaction>> GetRecentTransactions(int id)
+    {
+        return await Db.Transactions.OrderByDescending(x => x.TransactionDate).Where(x => x.FromUserId == id || x.ToUserId == id).ToListAsync();
+    }
+
     public async Task<Transaction?> GetTransactionByTransactionId(string transactionId)
     {
         return await Db.Transactions.Where(x => x.SystemTransactionId == transactionId).SingleOrDefaultAsync();
     }
-
     public async Task<bool> BuyAirtime(Transaction transaction)
     {
         Transaction airTimeTransaction = new()

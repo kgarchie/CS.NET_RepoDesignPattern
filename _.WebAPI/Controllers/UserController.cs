@@ -40,7 +40,7 @@ public class UsersController : ControllerBase
                 errors.Add("First name is required");
             if (request.LastName == string.Empty)
                 errors.Add("Last name is required");
-            if (request.NationalUserId <= 0 || request.NationalUserId.ToString().Length != 20)
+            if (request.NationalUserId <= 0 || request.NationalUserId.ToString().Length <= 5)
                 errors.Add("Error: National Id is required");
 
             if (errors.Any())
@@ -93,5 +93,12 @@ public class UsersController : ControllerBase
             return NotFound();
 
         return Ok(user);
+    }
+
+    [HttpGet("/user/{id:int}/transactions")]
+    public async Task<IActionResult> GetRecentUserTransactions(int id)
+    {
+        var recentTransactions = await _unitOfWork.Transactions.GetRecentTransactions(id);
+        return Ok(recentTransactions);
     }
 }

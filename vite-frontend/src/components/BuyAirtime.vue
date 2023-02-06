@@ -58,12 +58,13 @@ name: "BuyAirtime",
         amount: parseInt(this.airtime.amount),
         phone: this.airtime.phone,
         
-        // for testing only
+        // for testing only to be populated dynamically
         fromUserId: 1,
         toUserId: 10
       };
+      
       axios.post(
-        "v1/transactions/buy-airtime/",
+        "v1/transactions/buy-airtime",
         this.airtime
       ).then((response) => {
         this.server_response = response.data;
