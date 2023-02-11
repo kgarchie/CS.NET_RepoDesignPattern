@@ -6,6 +6,8 @@
   --color-tertiary: #EBC7E6;
   --black: #1f2937;
   --white: #eeee;
+  --warning: #ffd900;
+  --error: #b30d0d;
 }
 
 *,
@@ -57,6 +59,169 @@ footer {
   display: flex;
   background-color: var(--color-primary);
   min-height: 2rem;
+  margin-top: 2rem;
+}
+
+.buy_airtime-form {
+  display: grid;
+  place-items: center;
+  min-width: 40vw;
+  width: 600px;
+  min-width: 40dvw;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.buy_airtime-form > div {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+.buy_airtime-form label {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.buy_airtime-form input, .buy_airtime-form textarea {
+  border: 1px solid var(--color-primary);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+.buy_airtime-form input:focus, .buy_airtime-form textarea:focus {
+  border: 1px solid var(--color-secondary);
+  outline: none;
+}
+.buy_airtime-form input::placeholder, .buy_airtime-form textarea::placeholder {
+  color: var(--color-primary);
+}
+.buy_airtime-form input:disabled, .buy_airtime-form textarea:disabled {
+  background-color: var(--color-tertiary);
+}
+.buy_airtime-form input:invalid, .buy_airtime-form textarea:invalid {
+  border: 1px solid var(--error);
+}
+.buy_airtime-form input:valid, .buy_airtime-form textarea:valid {
+  border: 1px solid var(--color-auxiliary);
+}
+.buy_airtime-form input:required, .buy_airtime-form textarea:required {
+  border: 1px solid var(--warning);
+}
+.buy_airtime-form input:optional, .buy_airtime-form textarea:optional {
+  border: 1px solid var(--color-primary);
+}
+.buy_airtime-form button[type=submit] {
+  background-color: var(--color-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.7rem;
+  margin-top: 0.5rem;
+}
+.buy_airtime-form button[type=submit]:hover, .buy_airtime-form button[type=submit]:focus, .buy_airtime-form button[type=submit]:active {
+  background-color: var(--color-auxiliary);
+  outline: none;
+}
+
+.send_money-form {
+  display: grid;
+  place-items: center;
+  min-width: 40vw;
+  width: 600px;
+  min-width: 40dvw;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.send_money-form > div {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+.send_money-form label {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.send_money-form input, .send_money-form textarea {
+  border: 1px solid var(--color-primary);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+.send_money-form input:focus, .send_money-form textarea:focus {
+  border: 1px solid var(--color-secondary);
+  outline: none;
+}
+.send_money-form input::placeholder, .send_money-form textarea::placeholder {
+  color: var(--color-primary);
+}
+.send_money-form input:disabled, .send_money-form textarea:disabled {
+  background-color: var(--color-tertiary);
+}
+.send_money-form input:invalid, .send_money-form textarea:invalid {
+  border: 1px solid var(--error);
+}
+.send_money-form input:valid, .send_money-form textarea:valid {
+  border: 1px solid var(--color-auxiliary);
+}
+.send_money-form input:required, .send_money-form textarea:required {
+  border: 1px solid var(--warning);
+}
+.send_money-form input:optional, .send_money-form textarea:optional {
+  border: 1px solid var(--color-primary);
+}
+.send_money-form button[type=submit] {
+  background-color: var(--color-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.7rem;
+  margin-top: 0.5rem;
+}
+.send_money-form button[type=submit]:hover, .send_money-form button[type=submit]:focus, .send_money-form button[type=submit]:active {
+  background-color: var(--color-auxiliary);
+  outline: none;
+}
+
+.recent_transactions-table {
+  margin: 0 auto;
+  text-align: center;
+  min-width: fit-content;
+  width: 80%;
+}
+.recent_transactions-table th {
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: underline;
+  background-color: var(--black);
+  color: var(--white);
+}
+.recent_transactions-table thhover {
+  background-color: var(--color-tertiary);
+  cursor: pointer;
+}
+.recent_transactions-table td {
+  padding: 10px;
+  font-size: 1.2rem;
+}
+.recent_transactions-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.recent_transactions-table tr:hover {
+  background-color: #ddd;
+}
+@media (max-width: 768px) {
+  .recent_transactions-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.container h1 {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
 }
 
 /*# sourceMappingURL=main.css.map */

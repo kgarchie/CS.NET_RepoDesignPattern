@@ -28,7 +28,6 @@ builder.Services.AddCors(options =>
                 // Remember to change these during actual production for security reasons
                 .AllowAnyHeader() // Alt is .WithHeaders("Content-Type", "Accept", "Authorization")us
                 .AllowAnyMethod(); // Alt is.WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            
         });
 });
 

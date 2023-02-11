@@ -1,0 +1,87 @@
+@mixin custom-form{
+    display: grid;
+    place-items: center;
+
+    > div{
+        display: block;
+        width: 100%;
+
+        margin-bottom: 1.2rem;
+    }
+
+    label{
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    input, textarea{
+        border: 1px solid var(--color-primary);
+        border-radius: 0.25rem;
+        padding: 0.5rem;
+        width: 100%;
+        &:focus{
+            border: 1px solid var(--color-secondary);
+            outline: none;
+        }
+
+        &::placeholder{
+            color: var(--color-primary);
+        }
+
+        &:disabled{
+            background-color: var(--color-tertiary);
+        }
+
+        &:invalid{
+            border: 1px solid var(--error);
+        }
+
+        &:valid{
+            border: 1px solid var(--color-auxiliary);
+        }
+
+        &:required{
+            border: 1px solid var(--warning);
+        }
+
+        &:optional{
+            border: 1px solid var(--color-primary);
+        }
+    }
+
+    button[type="submit"]{
+        background-color: var(--color-primary);
+        color: var(--white);
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.5rem 0.7rem;
+        margin-top: 0.5rem;
+        
+        &:hover,
+        &:focus,
+        &:active{
+            background-color: var(--color-auxiliary);
+            outline: none;
+        }
+    }
+}
+
+.buy_airtime-form{
+    @include custom-form;
+
+    min-width: 40vw;
+    width: 600px;
+    min-width: 40dvw;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.send_money-form{
+    @include custom-form;
+
+    min-width: 40vw;
+    width: 600px;
+    min-width: 40dvw;
+    max-width: 80%;
+    margin: 0 auto;
+}

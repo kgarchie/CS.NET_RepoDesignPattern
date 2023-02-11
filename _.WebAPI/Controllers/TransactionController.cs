@@ -18,7 +18,7 @@ public class TransactionController : ControllerBase
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
-    
+
     [HttpPost("make-transaction")]
     public async Task<IActionResult> MakeTransaction(MakeTransactionRequest request)
     {
@@ -33,24 +33,27 @@ public class TransactionController : ControllerBase
                 TransactionType = 1,
                 SystemTransactionId = new Guid().ToString()
             };
-        
-            
+
+
             var transactionStatus = await _unitOfWork.Transactions.GenericTransaction(transaction);
-            if (!transactionStatus) return new JsonResult("Transaction Failed Due To An Internal Error") { StatusCode = 500 };
+            if (!transactionStatus)
+                return new JsonResult("Transaction Failed Due To An Internal Error") { StatusCode = 500 };
 
             // Find a better way to do this
             // Add a new line to the result
             var result = "Transaction Successful " +
                          "" + request;
-            return new JsonResult(result){StatusCode = 200};
-        } catch (Exception e)
+            return new JsonResult(result) { StatusCode = 200 };
+        }
+        catch (Exception e)
         {
             _logger.LogError(e, "Error Occurred While Making Transaction");
-            return new JsonResult("Transaction Failed Due To An Internal Error | Transaction Was Not Made") { StatusCode = 500 };
+            return new JsonResult("Transaction Failed Due To An Internal Error | Transaction Was Not Made")
+                { StatusCode = 500 };
         }
     }
-    
-    
+
+
     [HttpPost("buy-airtime")]
     public async Task<IActionResult> BuyAirtime(BuyAirtimeRequest request)
     {
@@ -66,19 +69,27 @@ public class TransactionController : ControllerBase
         var phoneNumber = request.PhoneNumber;
         Console.Write(phoneNumber);
         // TODO: to be modified once db has been updated with phone numbers
-        
+
 
         var transactionStatus = await _unitOfWork.Transactions.GenericTransaction(transaction);
-        if (!transactionStatus) return new JsonResult("Transaction Failed Due To An Internal Error") { StatusCode = 500 };
+        if (!transactionStatus)
+            return new JsonResult("Transaction Failed Due To An Internal Error") { StatusCode = 500 };
 
         // Find a better way to do this
         var result = "Transaction Successful\n" + request;
-        return new JsonResult(result){StatusCode = 200};
+        return new JsonResult(result) { StatusCode = 200 };
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetTransaction(int id)
     {
         return Ok(await _unitOfWork.Transactions.GetTransactionByDbId(id));
+    }
+
+    // User should be admin
+    [HttpGet("recent-transactions")]
+    public async Task<IActionResult> GetRecentTransactions()
+    {
+        return Ok(await _unitOfWork.Transactions.GetRecentTransactions(null));
     }
 }

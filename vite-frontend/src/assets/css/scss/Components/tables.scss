@@ -1,0 +1,45 @@
+﻿@mixin general-table {
+  margin: 0 auto;
+  text-align: center;
+  min-width: fit-content;
+
+  th {
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: underline;
+    background-color: var(--black);
+    color: var(--white);
+
+    &hover {
+      background-color: var(--color-tertiary);
+      cursor: pointer;
+    }
+  }
+
+  td {
+    padding: 10px;
+    font-size: 1.2rem;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.recent_transactions-table {
+  @include general-table;
+
+  width: 80%;
+}

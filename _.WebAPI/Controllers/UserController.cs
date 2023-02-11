@@ -44,14 +44,14 @@ public class UsersController : ControllerBase
                 errors.Add("Error: National Id is required");
 
             if (errors.Any())
-                return new JsonResult(errors) {StatusCode = 401};
+                return new JsonResult(errors) { StatusCode = 401 };
 
             var checkIfUserExists = await _unitOfWork.Users.GetUserByNationalId(request.NationalUserId);
             await _unitOfWork.CompleteAsync();
 
             if (checkIfUserExists != null)
                 return new JsonResult("User with that National Id already exists") { StatusCode = 400 };
-            
+
 
             var user = await _unitOfWork.Users.RegisterUser(request);
             await _unitOfWork.CompleteAsync();
@@ -70,7 +70,7 @@ public class UsersController : ControllerBase
         catch (Exception e)
         {
             var enumerable = errors.Append(e.ToString());
-            return new JsonResult(enumerable.ToString()){StatusCode = 500};
+            return new JsonResult(enumerable.ToString()) { StatusCode = 500 };
         }
     }
 

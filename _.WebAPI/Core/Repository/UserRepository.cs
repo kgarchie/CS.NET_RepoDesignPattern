@@ -81,6 +81,7 @@ public class UserRepository : GenericRepository<User>, IUserRepository
         // Gets the recent transactions
         if (days <= 0) return null;
         
+        // Opportunity for improvement: Use GetRecentTransactions from GenericRepository
         var transactions = await Db.Transactions
             .Where(x => x.FromUserId == user.DbUserId && x.TransactionDate >= DateTime.Now.AddDays(-days))
             .ToListAsync();

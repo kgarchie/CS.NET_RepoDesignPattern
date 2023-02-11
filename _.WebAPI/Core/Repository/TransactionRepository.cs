@@ -16,15 +16,23 @@ public class TransactionRepository : GenericRepository<Transaction>, ITransactio
         return await Db.Transactions.OrderByDescending(x => x.TransactionDate).ToListAsync();
     }
 
-    public async Task<IEnumerable<Transaction>> GetRecentTransactions(int id)
+    public async Task<IEnumerable<Transaction>> GetRecentTransactions(int? userId)
     {
-        return await Db.Transactions.OrderByDescending(x => x.TransactionDate).Where(x => x.FromUserId == id || x.ToUserId == id).ToListAsync();
+        IEnumerable<Transaction>? transactions;
+        if (userId != null)
+            transactions = await Db.Transactions.OrderByDescending(x => x.TransactionDate)
+                .Where(x => x.FromUserId == userId || x.ToUserId == userId).Take(50).ToListAsync();
+        
+        transactions = await Db.Transactions.OrderByDescending(x => x.TransactionDate).Take(100).ToListAsync();
+        
+        return transactions;
     }
 
     public async Task<Transaction?> GetTransactionByTransactionId(string transactionId)
     {
         return await Db.Transactions.Where(x => x.SystemTransactionId == transactionId).SingleOrDefaultAsync();
     }
+
     public async Task<bool> BuyAirtime(Transaction transaction)
     {
         Transaction airTimeTransaction = new()
@@ -36,7 +44,7 @@ public class TransactionRepository : GenericRepository<Transaction>, ITransactio
             TransactionType = 2,
             SystemTransactionId = Guid.NewGuid().ToString()
         };
-        
+
         try
         {
             // deduct from sender
@@ -63,7 +71,7 @@ public class TransactionRepository : GenericRepository<Transaction>, ITransactio
             return false;
         }
     }
-    
+
     public async Task<bool> TopUpMoneyBalance(Transaction transaction)
     {
         Transaction topUpTransaction = new()
@@ -75,22 +83,23 @@ public class TransactionRepository : GenericRepository<Transaction>, ITransactio
             TransactionType = 1,
             SystemTransactionId = Guid.NewGuid().ToString()
         };
-        
+
         try
         {
             // add to transaction table
             await Db.Transactions.AddAsync(topUpTransaction);
             Db.Entry(topUpTransaction).State = EntityState.Added;
-            
+
             // add to User as money balance
             var user = await Db.Users.SingleOrDefaultAsync(x => x.DbUserId == transaction.FromUserId);
             if (user == null) return false;
             user.Balance += transaction.TransactionAmount;
             Db.Entry(user).State = EntityState.Modified;
-            
+
             await Db.SaveChangesAsync();
             return true;
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             MyLogger.LogError(e, "Error topping up money balance");
             return false;

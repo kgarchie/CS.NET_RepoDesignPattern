@@ -1,3 +1,14 @@
 ﻿@import "Components/reset";
 @import "Components/navbar";
 @import "Components/footer";
+@import "Components/forms";
+@import "Components/tables";
+
+.container{
+    h1{
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--color-primary);
+    }
+}

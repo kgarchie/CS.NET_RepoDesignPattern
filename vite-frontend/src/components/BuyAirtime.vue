@@ -2,14 +2,14 @@
   <Teleport to="head">
     <title>Buy Airtime</title>
   </Teleport>
-  <div class="grid-container">
+  <div class="container">
     <h1>Buy Airtime</h1>
     <div class="messages">
       <ul>
         <li v-for="message in messages" :key="message">{{ message }}</li>
       </ul>
     </div>
-    <form @submit.prevent="buyAirtime">
+    <form @submit.prevent="buyAirtime" class="buy_airtime-form">
       <div>
         <label for="amount">Amount</label>
         <input type="number" id="amount" v-model="airtime.amount" />
@@ -19,12 +19,12 @@
         <input type="text" id="phone" v-model="airtime.phone" />
       </div>
       <div>
-        <button>Buy Airtime</button>
+        <button type="submit">Buy Airtime</button>
       </div>
       <div class="form-errors">
         <div v-if="errors">
           <ul>
-            <li v-for="error in errors" :key="error">{{ error }}</li>
+            <li v-for="error in errors" :key="error">{{ error.toString() }}</li>
           </ul>
         </div>
       </div>
@@ -42,7 +42,7 @@ name: "BuyAirtime",
       amount: "",
       phone: "",
     },
-    server_response: "",
+    server_response: [],
     errors: [],
     messages: []
   };
@@ -58,7 +58,7 @@ name: "BuyAirtime",
         amount: parseInt(this.airtime.amount),
         phone: this.airtime.phone,
         
-        // for testing only to be populated dynamically
+        // for testing only to be populated dynamically after login
         fromUserId: 1,
         toUserId: 10
       };
@@ -73,7 +73,6 @@ name: "BuyAirtime",
         }
       }).catch((error) => {
         this.errors = error.response.data.errors;
-        console.log(this.errors);
       });
     },
   },
